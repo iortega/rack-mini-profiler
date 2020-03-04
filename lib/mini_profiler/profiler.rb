@@ -220,7 +220,6 @@ module Rack
         options = {
           ignore_files: query_params['memory_profiler_ignore_files'],
           allow_files: query_params['memory_profiler_allow_files'],
-          scale_bytes: true,
         }
         options[:top] = Integer(query_params['memory_profiler_top']) if query_params.key?('memory_profiler_top')
         result = StringIO.new
@@ -228,7 +227,7 @@ module Rack
           _, _, body = @app.call(env)
           body.close if body.respond_to? :close
         end
-        report.pretty_print(result)
+        report.pretty_print(result).pretty_print(scale_bytes: true)
         return client_settings.handle_cookie(text_result(result.string))
       end
 
