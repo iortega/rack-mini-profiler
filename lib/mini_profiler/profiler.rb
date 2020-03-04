@@ -220,6 +220,7 @@ module Rack
         options = {
           ignore_files: query_params['memory_profiler_ignore_files'],
           allow_files: query_params['memory_profiler_allow_files'],
+          scale_bytes: true,
         }
         options[:top] = Integer(query_params['memory_profiler_top']) if query_params.key?('memory_profiler_top')
         result = StringIO.new
