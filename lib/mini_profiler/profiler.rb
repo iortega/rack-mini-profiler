@@ -227,7 +227,7 @@ module Rack
           _, _, body = @app.call(env)
           body.close if body.respond_to? :close
         end
-        report.pretty_print(result).pretty_print(scale_bytes: true)
+        report.pretty_print(result, scale_bytes: true)
         return client_settings.handle_cookie(text_result(result.string))
       end
 
